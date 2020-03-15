@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.hardware.Arm;
 import org.firstinspires.ftc.teamcode.hardware.BlockGripper;
+import org.firstinspires.ftc.teamcode.hardware.FoundationGripper;
 import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 import org.firstinspires.ftc.teamcode.misc.ButtonPress;
@@ -51,6 +52,33 @@ public class Teleop extends LinearOpMode {
             else { //neither
                 robot.intake.runIntake(Intake.Direction.STOP);
             }
+
+            //foundation gripper code
+            if (ButtonPress.isGamepad1_dpad_up_pressed()){
+                if(robot.foundationGripper.position == FoundationGripper.Position.UP){
+                    robot.foundationGripper.moveFoundationGripper(FoundationGripper.Position.READY);
+                }
+                else if (robot.foundationGripper.position == FoundationGripper.Position.READY){
+                    robot.foundationGripper.moveFoundationGripper(FoundationGripper.Position.DOWN);
+                }
+                else if (robot.foundationGripper.position == FoundationGripper.Position.DOWN){
+                    robot.foundationGripper.moveFoundationGripper(FoundationGripper.Position.UP);
+                }
+            }
+
+            //block gripper code
+            if (ButtonPress.isGamepad1_right_bumper_pressed()) {
+                if (robot.blockGripper.position == BlockGripper.Position.OPEN) {
+                    robot.blockGripper.moveBlockGripper(BlockGripper.Position.CLOSED);
+                }
+                else if (robot.blockGripper.position == BlockGripper.Position.CLOSED) {
+                    robot.blockGripper.moveBlockGripper(BlockGripper.Position.OPEN);
+                    if(robot.arm.location == Arm.Position.DOWN || robot.arm.location == Arm.Position.DEPOSIT) {
+                        robot.arm.moveArm(Arm.Position.TRAVELING);
+                    }
+                }
+            }
+
 
             //drivetrain code
             robot.drivetrain.setPower(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
