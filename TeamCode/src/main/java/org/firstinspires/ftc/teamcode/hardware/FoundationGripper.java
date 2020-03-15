@@ -22,6 +22,7 @@ public class FoundationGripper {
 
     public FoundationGripper (DeviceManager deviceManager) {
         foundationGripper = deviceManager.foundationGripper;
+        foundationGripper.setPosition(foundationGripperPos);
     }
 
     public void moveFoundationGripper (Position p) {

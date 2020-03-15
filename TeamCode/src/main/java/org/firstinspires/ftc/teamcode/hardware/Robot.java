@@ -13,6 +13,7 @@ public class Robot {
     public BackAutoGripper backAutoGripper;
     public FrontAutoGripper frontAutoGripper;
     public FoundationGripper foundationGripper;
+    public BlockGripper blockGripper;
 
     public Robot(OpMode opMode){
         this.opMode = opMode;
@@ -27,5 +28,7 @@ public class Robot {
         backAutoGripper = new BackAutoGripper(deviceManager);
         frontAutoGripper = new FrontAutoGripper(deviceManager);
         foundationGripper = new FoundationGripper(deviceManager);
+        blockGripper = new BlockGripper(deviceManager);
+
     }
 }

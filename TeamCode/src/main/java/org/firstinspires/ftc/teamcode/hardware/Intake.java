@@ -2,7 +2,12 @@ package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Intake {
+    Timer timer;
+
     public DcMotor leftIntake;
     public DcMotor rightIntake;
 
@@ -46,9 +51,22 @@ public class Intake {
         }
     }
 
+    public void delayOuttake(int delay){
+        timer = new Timer();
+        timer.schedule(new OuttakeDelay(), delay);
+    }
+
     public void process(){
         leftIntake.setPower(leftPower);
         rightIntake.setPower(rightPower);
+    }
+
+    public class OuttakeDelay extends TimerTask{
+        public void run(){
+            leftPower = LEFTIINTAKE_OUT;
+            rightPower = RIGHTINTAKE_OUT;
+            direction = Direction.OUT;
+        }
     }
 
 }
