@@ -43,6 +43,10 @@ public class Arm {
         switch(position){
             case UP:
                 armPos = ARM_UP;
+                
+                //Note, this is specifically for teleop. The button d makes the arm go up, However, if the arm is already
+                //in the up position, then we want the button d to make it go into deposit mode.
+                
                 if(location == Position.UP) {
                     armPos = ARM_DEPOSIT;
                     location = Position.DEPOSIT;
